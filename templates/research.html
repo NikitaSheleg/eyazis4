@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+    <title> Essay Research Assitant </title>
+{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <style>
+        #content-table {
+            border: solid black 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #content-table td {
+            padding: 7px;
+        }
+    </style>
+
+    <table id="content-table" border="1"> 
+        <tr>
+            <th> Excerpts: </th> 
+            <th> Links: </th>
+        </tr>
+        {% for i in range(content|length) %}
+            <tr>
+                <td>
+                    {% if not content[i] == None %}
+                        {{content[i]}} 
+                    {% else %}
+                        <p> Nothing was found, check the link for more information </p>
+                    {% endif %}
+                </td>
+                <td><a href="{{webpages[i]}}"><u> Read More </u></a> </td>  
+            </tr>
+        {% endfor %}
+    </table>
+
+    <style>
+        #content-table {
+            width: 60%;
+            margin: 0px 20%;
+        }
+    </style>
+    <form action="./#">
+        <input type="submit" value="Go back!" />
+    </form>
+{% endblock %}
