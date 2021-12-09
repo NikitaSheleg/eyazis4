@@ -109,10 +109,9 @@ def home():                                 # Defines and renders home page
 	if request.method == "POST":			# If request method is post go to research page
 		user_input = []		# Initializes user input list
 		choices_list = []
+		topic = takeCommand()
+		user_input =[takeCommand()]
 
-		topic = request.form["research"]	# Gets topic from form
-		user_input = request.form["keywords"].split(", ")	# Gets keywords from keywords box
-		
 		choices_list.append(request.form.getlist('option1'))	# Gets extra options
 		choices_list.append(request.form.getlist('option2'))	
 		choices_list.append(request.form.getlist('option3'))	
@@ -159,7 +158,7 @@ def research(words, choices):                                         # Defines 
 		if not paragraph == None:
 			check = False
 
-	if check:	# If it empty flashes message 
+	if check:	# If it empty flashes message
 		flash("Add more keywords!")
 
 	return render_template("research.html", content=paragraphs, webpages=links)	# Renders research page
